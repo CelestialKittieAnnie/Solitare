@@ -36,6 +36,7 @@ body {
     color: #333;
     position: absolute;
     cursor: grab;
+    transition: transform 0.2s, border 0.2s;
 }
 
 .card.red { background-color: #ff9999; }
@@ -64,4 +65,9 @@ body {
     bottom: 5px;
     right: 5px;
     transform: rotate(180deg);
+}
+
+.card:hover {
+    border: 2px solid #FFD700; /* Gold border on hover */
+    transform: scale(1.2); /* Scale up by 20% on hover */
 }

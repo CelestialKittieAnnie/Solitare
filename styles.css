@@ -35,6 +35,7 @@ body {
     font-weight: bold;
     color: #333;
     position: absolute;
+    cursor: grab;
 }
 
 .card.red { background-color: #ff9999; }

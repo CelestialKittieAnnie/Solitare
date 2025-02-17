@@ -48,3 +48,20 @@ body {
 .card .suit {
     font-size: 32px;
 }
+
+.card .top-left,
+.card .bottom-right {
+    position: absolute;
+    font-size: 16px;
+}
+
+.card .top-left {
+    top: 5px;
+    left: 5px;
+}
+
+.card .bottom-right {
+    bottom: 5px;
+    right: 5px;
+    transform: rotate(180deg);
+}

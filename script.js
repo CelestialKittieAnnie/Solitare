@@ -46,42 +46,46 @@ document.addEventListener('DOMContentLoaded', () => {
             cardElement.className = `card ${card.color}`;
             cardElement.style.top = `${rowIndex * 30}px`;
             cardElement.style.left = `${colIndex * 110}px`;
-            cardElement.innerHTML = `<div class="value">${card.value}</div><div class="suit">${card.suit}</div>`;
+            cardElement.innerHTML = `
+                <div class="top-left">${card.value} ${card.suit}</div>
+                <div class="suit">${card.suit}</div>
+                <div class="bottom-right">${card.value} ${card.suit}</div>
+            `;
+            cardElement.draggable = true; // Make card draggable
+            cardElement.dataset.suit = card.suit;
+            cardElement.dataset.value = card.value;
             gameBoard.appendChild(cardElement);
         });
     });
 
-    // Add event listeners and game logic
-    // Implement game rules for moving cards, building foundation piles, and using the stockpile
-    // Detailed implementation would be quite extensive, but here's a skeleton
+    // Drag-and-drop functionality
+    let draggedCard = null;
 
-    function moveCard(card, fromPile, toPile) {
-        // Logic for moving cards
-        // Check if the move is valid
-        // Update game state
-        // Render changes
-    }
+    document.addEventListener('dragstart', event => {
+        draggedCard = event.target;
+    });
+
+    document.addEventListener('dragover', event => {
+        event.preventDefault();
+    });
+
+    document.addEventListener('drop', event => {
+        if (event.target.className.includes('card')) {
+            const targetCard = event.target;
+            // Implement logic to check if move is valid based on solitaire rules
+            // If valid, move draggedCard to targetCard's position
+            const validMove = true; // Placeholder for actual move validation logic
+            if (validMove) {
+                const draggedIndex = Array.from(gameBoard.children).indexOf(draggedCard);
+                const targetIndex = Array.from(gameBoard.children).indexOf(targetCard);
+                gameBoard.insertBefore(draggedCard, targetIndex < draggedIndex ? targetCard : targetCard.nextSibling);
+                draggedCard = null;
+            }
+        }
+    });
 
     function checkWinCondition() {
         // Check if all foundation piles are complete
         // Display winning message if game is won
     }
-
-    // Example event listener for moving cards
-    document.querySelectorAll('.card').forEach(cardElement => {
-        cardElement.addEventListener('dragstart', event => {
-            // Handle drag start
-        });
-
-        cardElement.addEventListener('dragover', event => {
-            // Handle drag over
-            event.preventDefault();
-        });
-
-        cardElement.addEventListener('drop', event => {
-            // Handle drop
-            // Move card if valid
-            checkWinCondition();
-        });
-    });
 });

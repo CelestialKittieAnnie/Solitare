@@ -1,0 +1,49 @@
+body {
+    background-color: #2E8B57;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+#game-board {
+    width: 80%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px;
+    padding: 20px;
+    background-color: #006400;
+    border-radius: 10px;
+    position: relative;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    position: absolute;
+}
+
+.card.red { background-color: #ff9999; }
+.card.orange { background-color: #ffcc99; }
+.card.yellow { background-color: #ffff99; }
+.card.green { background-color: #99ff99; }
+.card.blue { background-color: #99ccff; }
+.card.purple { background-color: #cc99ff; }
+
+.card .suit {
+    font-size: 32px;
+}

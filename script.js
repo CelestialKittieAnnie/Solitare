@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Drag-and-drop functionality
     let draggedCard = null;
 
+    // Mouse events
     document.addEventListener('dragstart', event => {
         draggedCard = event.target;
     });
@@ -81,6 +82,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 gameBoard.insertBefore(draggedCard, targetIndex < draggedIndex ? targetCard : targetCard.nextSibling);
                 draggedCard = null;
             }
+        }
+    });
+
+    // Touch events
+    document.addEventListener('touchstart', event => {
+        if (event.target.className.includes('card')) {
+            draggedCard = event.target;
+            event.preventDefault();
+        }
+    });
+
+    document.addEventListener('touchmove', event => {
+        if (draggedCard) {
+            const touch = event.touches[0];
+            draggedCard.style.top = `${touch.clientY - 75}px`;
+            draggedCard.style.left = `${touch.clientX - 50}px`;
+            event.preventDefault();
+        }
+    });
+
+    document.addEventListener('touchend', event => {
+        if (draggedCard) {
+            const touch = event.changedTouches[0];
+            const targetCard = document.elementFromPoint(touch.clientX, touch.clientY);
+            if (targetCard && targetCard.className.includes('card')) {
+                // Implement logic to check if move is valid based on solitaire rules
+                // If valid, move draggedCard to targetCard's position
+                const validMove = true; // Placeholder for actual move validation logic
+                if (validMove) {
+                    const draggedIndex = Array.from(gameBoard.children).indexOf(draggedCard);
+                    const targetIndex = Array.from(gameBoard.children).indexOf(targetCard);
+                    gameBoard.insertBefore(draggedCard, targetIndex < draggedIndex ? targetCard : targetCard.nextSibling);
+                    draggedCard = null;
+                }
+            } else {
+                draggedCard.style.top = ''; // Reset position
+                draggedCard.style.left = ''; // Reset position
+                draggedCard = null;
+            }
+            event.preventDefault();
         }
     });
 
